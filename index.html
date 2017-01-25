@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <style>
+        #overlay{
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            width: 100%;
+            height: 100vh;
+            background: rgba(7, 23, 37, 0.9);
+            color:white;
+            display: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #inner{
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-0">
+            <h1>Overlay Example</h1>
+            <button class="btn btn-primary" id="show" onclick="">Show Overlay</button>
+        </div>
+    </div>
+
+</div>
+
+<div id="overlay">
+    <div id="inner">
+        <h3>Loading...</h3>
+        <img src="pacman.gif">
+    </div>
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+
+        $("#overlay").hide();
+
+        $("#show").click( function () {
+            $("#overlay").fadeIn();
+        });
+
+        //ESC key
+        $(document).keyup(function(e) {
+            //ESC
+            if (e.keyCode === 27){
+                $("#overlay").fadeOut();
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
