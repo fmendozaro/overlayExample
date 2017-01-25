@@ -13,13 +13,12 @@
             height: 100vh;
             background: rgba(7, 23, 37, 0.9);
             color:white;
-            display: none;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        #inner{
-
+        #wrapper{
+            display: none;
         }
     </style>
 </head>
@@ -35,10 +34,12 @@
 
 </div>
 
-<div id="overlay">
-    <div id="inner">
-        <h3>Loading...</h3>
-        <img src="pacman.gif">
+<div id="wrapper" class="hidden">
+    <div id="overlay">
+        <div id="inner">
+            <h3>Loading...</h3>
+            <img src="pacman.gif">
+        </div>
     </div>
 </div>
 
@@ -49,17 +50,15 @@
 <script>
     $(document).ready(function(){
 
-        $("#overlay").hide();
-
         $("#show").click( function () {
-            $("#overlay").fadeIn();
+            $("#wrapper").fadeIn();
         });
 
         //ESC key
         $(document).keyup(function(e) {
             //ESC
             if (e.keyCode === 27){
-                $("#overlay").fadeOut();
+                $("#wrapper").fadeOut();
             }
         });
 
