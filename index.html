@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+    <title>Overlay Example</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/pacman.css">
     <style>
         #overlay{
             position: fixed;
@@ -23,35 +24,50 @@
     </style>
 </head>
 <body>
-<div class="container">
 
+<div class="container">
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-0">
+        <div class="col-lg-8 col-lg-offset-2">
             <h1>Overlay Example</h1>
             <button class="btn btn-primary" id="show" onclick="">Show Overlay</button>
+            <br>
+            <p class="alert alert-success hide"></p>
+            <div id="content"></div>
         </div>
     </div>
-
 </div>
 
-<div id="wrapper" class="hidden">
+<div id="wrapper">
     <div id="overlay">
         <div id="inner">
             <h3>Loading...</h3>
-            <img src="pacman.gif">
+            <br>
+            <div class='uil-pacman-css' style='-webkit-transform:scale(1)'><div><div></div></div><div><div></div></div><div><div></div></div></div>
         </div>
     </div>
 </div>
 
-<script
-        src="https://code.jquery.com/jquery-3.1.1.js"
-        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+
 <script>
     $(document).ready(function(){
 
         $("#show").click( function () {
+
             $("#wrapper").fadeIn();
+
+            $.ajax({
+                url: "http://swapi.co/api/people/?format=json"
+            }).done(function(data){
+
+                $("#wrapper").fadeOut();
+                $(".alert-success").text("Star wars names loaded");
+                $(".alert-success").removeClass("hide");
+                data.results.forEach(function(element){
+                    $("#content").append("<b>Name: </b>"+ element.name + "<br>");
+                });
+            });
+
         });
 
         //ESC key
